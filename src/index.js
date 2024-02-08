@@ -18,7 +18,7 @@ const disable_cache = require("./middlewares/disable_cache.js");
 app.use("/static", express.static(require("path").join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieSession({
-    name: 'sessão',
+    name: 'session',
     keys: ['chave 01', 'chave 02'],
     maxAge:  4 *  60 *  60 *  1000
 }));
