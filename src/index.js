@@ -15,7 +15,7 @@ const errorRouter = require('./routes/error.js');
 
 const disable_cache = require("./middlewares/disable_cache.js");
 
-app.use(express.static(require("path").join(__dirname, "public")));
+app.use("/static", express.static(require("path").join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieSession({
     name: 'sessão',
