@@ -1,0 +1,24 @@
+{
+  "name": "conexao-carreira",
+  "version": "1.0.0",
+  "description": "Website Conexão Carreira",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-session": "^2.1.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "follow-redirects": "^1.15.3",
+    "multer": "^1.4.5-lts.1",
+    "node-mailjet": "^6.0.5",
+    "nodemailer": "^6.9.8",
+    "pg": "^8.11.3",
+    "seedrandom": "^3.0.5"
+  }
+}
