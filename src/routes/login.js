@@ -146,9 +146,8 @@ router.post("/recuperar-senha", withoutLogin, async (req, res) => {
                 let code = Math.floor(generator() * (end - start + 1)) + start;
 
                 req.session.reset_code = code;
-                console.log(code);
-
-                /*if (!sendEmail(req.body.email, code)) {
+                
+                if (!sendEmail(req.body.email, code)) {
                     imports = render("base/css-import", {
                         link: "/static/css/pages/login"
                     });
@@ -162,7 +161,7 @@ router.post("/recuperar-senha", withoutLogin, async (req, res) => {
                     });
 
                     break;
-                }*/
+                }
 
                 imports = render("base/css-import", {
                     link: "/static/css/pages/login"
