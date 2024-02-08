@@ -20,3 +20,5 @@ A aplicação `Conexão Carreira` foi desenvolvida para promover a conexão entr
 - **Cadastro facilitado**: Com Conexão Carreira você pode divulgar seu currículo para o mundo em poucos cliques, facilidade e comodidade são os nossos principais valores.
 
 - **Consulta de currículos anônima**: No Conexão Carreira você, empresa, pode procurar por jovens aspirantes no mercado de trabalho de maneira totalmente anônima, não sendo necessária a presença de uma conta registrada no sistema.
+
+- **Sistema de filtragem**: Encontre resultados mais precisos utilizando nossos sistemas de filtros nas suas buscas por candidatos adequados.
