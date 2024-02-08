@@ -1,0 +1,129 @@
+@import "component/navbar.css";
+@import "component/footer.css";
+
+:root {
+    --bluecolor: #367DFF;
+    --greencolor: #139b13;
+    --redcolor: #da1a1a;
+    --fontfamily: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --textsize: 12pt;
+    --titlesize: 30pt;
+    --subtitlesize: 25pt;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: var(--fontfamily);
+}
+
+p, span, li {
+    font-size: var(--textsize);
+}
+
+h1 {
+    font-size: var(--titlesize);
+}
+
+h2 {
+    font-size: var(--subtitlesize);
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+}
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 7px;
+    border: none;
+    transition: 0.3s;
+    text-decoration: none;
+    user-select: none;
+    cursor: pointer;
+}
+
+.btn-outline-blue {
+    background-color: white;
+    color: var(--bluecolor);
+    border: 2px solid var(--bluecolor);
+    font-weight: 600;
+}
+
+.btn-outline-blue:hover {
+    background-color: var(--bluecolor);
+    color: white;
+}
+
+.btn-outline-green {
+    background-color: white;
+    color: var(--greencolor);
+    border: 2px solid var(--greencolor);
+    font-weight: 600;
+}
+
+.btn-outline-green:hover {
+    background-color: var(--greencolor);
+    color: white;
+}
+
+.btn-outline-red {
+    background-color: white;
+    color: var(--redcolor);
+    border: 2px solid var(--redcolor);
+    font-weight: 600;
+}
+
+.btn-outline-red:hover {
+    background-color: var(--redcolor);
+    color: white;
+}
+
+hr {
+    width: 80%;
+    border-color: gray;
+}
+
+.text-danger {
+    color: rgb(255, 31, 31);
+}
+
+.ml-1 {
+    margin-left: 5px;
+}
+
+.input {
+    display: block;
+}
+
+.input input[type=text], .input input[type=email], .input input[type=password] {
+    max-width: 100%;
+    height: 30px;
+    padding: 5px 10px;
+    background-color: white;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    display: block;
+}
+
+.input textarea {
+    max-width: 100%;
+    min-width: 100%;
+    width: 100%;
+    max-height: 80px;
+    min-height: 80px;
+    border: none;
+    padding: 5px;
+    background-color: white;
+    border-radius: 5px;
+    outline: none;
+}
+
+@media (max-width: 768px) {
+    :root {
+        --titlesize: 20pt;
+        --subtitlesize: 15pt;
+    }
+}

@@ -1,0 +1,109 @@
+<section class="container content">
+    <h1>Editar currículo</h1>
+
+    <form method="post" action="" class="data-grid" enctype="multipart/form-data">
+        <div class="profile-img">
+            <input type="file" name="image" id="image-file" style="display: none" accept=".png, .jpeg, .jpg" value="">
+            <img src="@{image}@" alt="" id="profile-image">
+            <div class="mask">
+                <span>Escolher foto</span>
+                <img src="/static/images/edit.png" alt="">
+            </div>
+        </div>
+
+        <div class="data">
+            <div class="data-column">
+                <div class="input">
+                    <label for="nome">Nome completo</label>
+                    <input type="text" name="nome" id="nome" value="@{nome}@" required>
+                </div>
+                <div class="input">
+                    <label for="email">E-mail</label>
+                    <input type="email" name="email" id="email" value="@{email}@" required>
+                </div>
+                <div class="input">
+                    <label for="telefone">Telefone</label>
+                    <input type="text" name="telefone" id="telefone" value="@{telefone}@" pattern="\([0-9]{2}\) [0-9]{8,}" required>
+                </div>
+            </div>
+            <div class="data-column">
+                <div class="input">
+                    <label for="curso">Curso</label>
+                    <select name="curso" id="curso">
+                        <option value="0" @{selected-course-0}@>Agroindústria</option>
+                        <option value="1" @{selected-course-1}@>Agropecuária</option>
+                        <option value="2" @{selected-course-2}@>Informática</option>
+                    </select>
+                </div>
+                <div class="input">
+                    <label for="estado">Estado atual</label>
+                    <select type="text" name="estado" id="estado">
+                        <option value="0" @{selected-state-0}@>Matriculado</option>
+                        <option value="1" @{selected-state-1}@>Cursando</option>
+                        <option value="2" @{selected-state-2}@>Trancado</option>
+                        <option value="3" @{selected-state-3}@>Concluído</option>
+                        <option value="4" @{selected-state-4}@>Desistente</option>
+                    </select>
+                </div>
+                <div class="input">
+                    <br>
+                    <button type="button" onclick="submitForm()" class="btn btn-outline-green">Salvar alterações</button>
+                </div>
+            </div>
+        </div>
+
+        <input type="hidden" name="action" value="edit">
+    </form>
+</section>
+
+<section id="edit">
+    <button class="btn btn-outline-red" onclick="location.href = '@{URL}@/usuario/curriculo/contatos'">Meus contatos</button>
+    <button class="btn btn-outline-blue ml-1" onclick="location.href = '@{URL}@/usuario/curriculo/habilidades'">Minhas habilidades</button>
+</section>
+
+<script>
+    document.getElementById('image-file').addEventListener('change', function () {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            // get loaded data and render thumbnail.
+            try {
+                document.getElementById('profile-image').src = e.target.result;
+            }
+
+            catch {
+                document.getElementById('profile-image').src = "/static/images/default user.png";
+            }
+        };
+
+        // read the image file as a data URL.
+        try {
+            if (!this.files[0].type.startsWith("image/")) {
+                alert("ERRO!\nSelecione uma imagem nos formatos PNG, JPG ou JPEG");
+                return;
+            }
+
+            reader.readAsDataURL(this.files[0]);
+        }
+
+        catch { }
+    });
+
+    document.querySelector('div.mask').addEventListener('click', function () {
+        document.getElementById('image-file').click();
+    });
+
+    function submitForm() {
+        if (document.getElementById('profile-image').src === "" || document.getElementById('profile-image').src === "/static/images/default user.png") {
+            alert("ERRO\nSelecione uma imagem de perfil");
+            return;
+        }
+
+        document.querySelector("form").submit();
+    }
+
+    document.getElementById('telefone').addEventListener('blur', function (e) {
+        let x = e.target.value.replace(/\D/g, '').match(/(\d{2})(\d{4})(\d{4,})/);
+        e.target.value = '(' + x[1] + ') ' + x[2] + x[3];
+    });
+</script>

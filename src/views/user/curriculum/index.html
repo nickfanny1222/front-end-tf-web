@@ -1,0 +1,91 @@
+<section class="container content">
+    <h1>Meu currículo</h1>
+
+    <div class="data-grid">
+        <img src="@{profile_image}@" alt="" id="profile-image">
+
+        <div class="data">
+            <div class="data-column">
+                <div class="input">
+                    <label for="nome">Nome completo</label>
+                    <input type="text" name="nome" id="nome" disabled value="@{nome_completo}@">
+                </div>
+                <div class="input">
+                    <label for="email">E-mail</label>
+                    <input type="text" name="email" id="email" disabled value="@{email}@">
+                </div>
+                <div class="input">
+                    <label for="telefone">Telefone</label>
+                    <input type="text" name="telefone" id="telefone" disabled value="@{telefone}@">
+                </div>
+            </div>
+            <div class="data-column">
+                <div class="input">
+                    <label for="curso">Curso</label>
+                    <input type="text" name="curso" id="curso" disabled value="@{curso}@">
+                </div>
+                <div class="input">
+                    <label for="estado">Estado atual</label>
+                    <input type="text" name="estado" id="estado" disabled value="@{estado}@">
+                </div>
+                <div class="input">
+                    <label for="habilidades">Habilidades e Experiências</label>
+                    <select name="habilidades" id="habilidades" value="Nenhuma" onchange="configDescricao()"></select>
+
+                    <p id="habilidade-desc"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container contacts">
+    <h2>Seus contatos</h2>
+    
+    <div class="contacts-grid">
+        @{contacts}@
+    </div>
+</section>
+
+<section id="edit">
+    <button type="button" class="btn btn-outline-blue" onclick="location.href = '@{URL}@/usuario/curriculo/editar'">Editar currículo</button>
+</section>
+
+<script>
+    const habilidades = [@{hability}@];
+
+    window.addEventListener("DOMContentLoaded", () => { createSelect(); configDescricao(); });
+
+    function createSelect() {
+        let select = document.getElementById("habilidades");
+
+        try {
+            select.options.forEach(item => {
+                item.remove();
+            });
+        } catch { }
+
+        if (habilidades.length == 0) {
+            let option = document.createElement("option");
+            option.innerHTML = "Você não possui habilidades";
+            select.appendChild(option);
+            return;
+        }
+
+        let id = 0;
+
+        habilidades.forEach(item => {
+            let option = document.createElement("option");
+            option.innerHTML = item.titulo;
+            option.setAttribute("value", id);
+            select.appendChild(option);
+            id ++;
+        });
+    }
+
+    function configDescricao() {
+        let select = document.getElementById("habilidades");
+        document.getElementById("habilidade-desc").innerHTML = habilidades[select.options.selectedIndex].descricao;
+    }
+
+</script>

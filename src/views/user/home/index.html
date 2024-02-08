@@ -1,0 +1,61 @@
+<section class="container content">
+    <h1>Painel do Candidato</h1>
+    <div class="card-grid">
+        <div class="card">
+            <img class="profile" src="@{image-path}@" alt="">
+            <h2>@{nome}@</h2>
+            <hr>
+            <div class="contacts">
+                @{contacts}@
+            </div>
+            <hr>
+            <span><i class="descricao">@{descricao}@</i></span>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <form action="" method="post" id="form" style="display: grid; place-items: center;">
+        <input type="hidden" name="action" value="delete">
+        <button type="button" class="btn btn-outline-red" onclick="openModal()">Excluir conta</button>
+    </form>
+</section>
+
+<section id="modal">
+    <div class="modal-background" style="display: none" onclick="openModal()"></div>
+
+    <div class="modal" style="display: none">
+        <div class="modal-content">
+            <div class="modal-title">
+                <h1>Excluir Conta</h1>
+                <button class="btn btn-outline-red" onclick="openModal()">&times;</button>
+            </div>
+
+            <hr>
+
+            <div class="modal-body">
+                <h4>Deseja realmente excluir sua conta?</h4>
+                <small>Essa é uma ação irreversível</small>
+            </div>
+
+            <hr>
+            
+            <div class="modal-footer">
+                <button class="btn btn-outline-green" onclick="openModal()">Cancelar</button>
+                <button class="btn btn-outline-red" onclick="document.getElementById('form').submit()">Excluir</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function openModal() {
+        let modal = document.querySelector('div.modal');
+
+        modal.style.display = modal.style.display == "none" ? "block" : "none";
+        
+        let background = document.querySelector('div.modal-background');
+
+        background.style.display = background.style.display == "none" ? "block" : "none";
+    }
+</script>

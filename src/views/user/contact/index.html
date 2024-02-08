@@ -1,0 +1,48 @@
+<section class="contact">
+    <form action="" method="post" class="contact-grid">
+        <h2>Editar contatos</h2>
+        <br>
+        <div class="input">
+            <label for="instagram">Instagram</label>
+            <div class="input-img">
+                <img src="/static/images/instagram.png" alt="instagram">
+                <input type="text" name="instagram" id="instagram" value="@{instagram}@">
+            </div>
+        </div>
+        <div class="input">
+            <label for="facebook">Facebook</label>
+            <div class="input-img">
+                <img src="/static/images/facebook.png" alt="facebook">
+                <input type="text" name="facebook" id="facebook" value="@{facebook}@">
+            </div>
+        </div>
+        <div class="input">
+            <label for="twitter">Twitter</label>
+            <div class="input-img">
+                <img src="/static/images/twitter.png" alt="twitter">
+                <input type="text" name="twitter" id="twitter" value="@{twitter}@">
+            </div>
+        </div>
+        <br>
+        <button type="button" onclick="submitForm()" class="btn btn-outline-green" name="acao" value="salvar">Salvar contatos</button>
+    </form>
+</section>
+
+<script>
+    function submitForm() {
+        let hasBeenFill = [
+            document.getElementById("instagram").value.length > 0,
+            document.getElementById("facebook").value.length > 0,
+            document.getElementById("twitter").value.length > 0
+        ];
+
+        for (let i = 0; i < hasBeenFill.length; i++) {
+            if (hasBeenFill[i]) {
+                document.querySelector("form").submit();
+                return;
+            }
+        }
+
+        alert("ERRO\nPreencha ao menos uma das formas de contato");
+    }
+</script>

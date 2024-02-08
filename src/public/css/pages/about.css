@@ -1,0 +1,52 @@
+.about h1 {
+    text-align: center;
+    margin: 40px auto;
+}
+
+.about p {
+    text-align: justify;
+    margin-bottom: 20px;
+}
+
+.creators {
+    margin: 60px auto;
+}
+
+.creators hr {
+    width: 100%;
+    border-color: lightgray;
+    margin: 20px 0;
+}
+
+.creators-grid {
+    display: flex;
+    justify-content: space-around;
+    user-select: none;
+}
+
+.creator {
+    display: grid;
+    place-items: center;
+}
+
+.creator img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background-color: lightgray;
+}
+
+.creator span {
+    margin-top: 10px;
+}
+
+@media (max-width: 920px) {
+    .creators-grid {
+        justify-content: space-between;
+        overflow-x: scroll;
+    }
+
+    .creator {
+        margin: auto 5px;
+    }
+}

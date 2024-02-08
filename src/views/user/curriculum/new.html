@@ -1,0 +1,153 @@
+<section>
+    <form method="post" action="" class="container content" enctype="multipart/form-data">
+        <h1>Cadastrar currículo</h1>
+
+        <div class="data-grid">
+            <div class="profile-img">
+                <input type="file" name="image" id="image-file" style="display: none" accept=".png, .jpeg, .jpg">
+                <img src="/static/images/default user.png" alt="" id="profile-image">
+                <div class="mask">
+                    <span>Escolher foto</span>
+                    <img src="/static/images/edit.png" alt="">
+                </div>
+            </div>
+
+            <div class="data">
+                <div class="data-column">
+                    <div class="input">
+                        <label for="nome">Nome Completo</label>
+                        <input type="text" name="nome" id="nome" value="" required>
+                    </div>
+                    <div class="input">
+                        <label for="telefone">Telefone</label>
+                        <input type="text" name="telefone" id="telefone" value="" required>
+                    </div>
+                </div>
+                <div class="data-column">
+                    <div class="input">
+                        <label for="curso">Curso</label>
+                        <select name="curso" id="curso">
+                            <option value="0">Agroindústria</option>
+                            <option value="1">Agropecuária</option>
+                            <option value="2">Informática</option>
+                        </select>
+                    </div>
+                    <div class="input">
+                        <label for="estado">Estado atual</label>
+                        <select type="text" name="estado" id="estado">
+                            <option value="0">Matriculado</option>
+                            <option value="1">Cursando</option>
+                            <option value="2">Trancado</option>
+                            <option value="3">Concluído</option>
+                            <option value="4">Desistente</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <br>
+            <h2>Cadastrar contatos</h2>
+            <br>
+            <div class="contact-grid">
+                <div class="input">
+                    <label for="instagram">Instagram</label>
+                    <div class="input-img">
+                        <img src="/static/images/instagram.png" alt="instagram">
+                        <input type="text" name="instagram" id="instagram">
+                    </div>
+                </div>
+                <div class="input">
+                    <label for="facebook">Facebook</label>
+                    <div class="input-img">
+                        <img src="/static/images/facebook.png" alt="facebook">
+                        <input type="text" name="facebook" id="facebook">
+                    </div>
+                </div>
+                <div class="input">
+                    <label for="twitter">Twitter</label>
+                    <div class="input-img">
+                        <img src="/static/images/twitter.png" alt="twitter">
+                        <input type="text" name="twitter" id="twitter">
+                    </div>
+                </div>
+            </div>
+            <br>
+            <button type="button" onclick="submitForm()" class="btn btn-outline-green">Salvar currículo</button>
+        </div>
+    </form>
+</section>
+
+<script>
+    document.getElementById('image-file').addEventListener('change', function () {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            // get loaded data and render thumbnail.
+            try {
+                document.getElementById('profile-image').src = e.target.result;
+            }
+
+            catch {
+                document.getElementById('profile-image').src = "./../../public/static/images/default user.png";
+            }
+        };
+
+        // read the image file as a data URL.
+        try {
+            if (!this.files[0].type.startsWith("image/")) {
+                alert("ERRO!\nSelecione uma imagem nos formatos PNG, JPG ou JPEG");
+                return;
+            }
+
+            reader.readAsDataURL(this.files[0]);
+        }
+
+        catch { }
+    });
+
+    document.querySelector('div.mask').addEventListener('click', function () {
+        document.getElementById('image-file').click();
+    });
+
+    function submitForm() {
+        if (document.getElementById('image-file').value == "") {
+            alert("ERRO\nSelecione uma imagem de perfil");
+            return;
+        }
+
+        if (!verifyContacts()) {
+            alert("ERRO\nPreencha ao menos uma das formas de contato");
+            return;
+        }
+
+        if (document.getElementById("nome").value.length == 0) {
+            alert("ERRO\nPreencha o campo de nome");
+            return;
+        }
+
+        if (document.getElementById("telefone").value.length == 0) {
+            alert("ERRO\nPreencha o campo de telefone");
+            return;
+        }
+
+        document.querySelector("form").submit();
+    }
+
+    function verifyContacts() {
+        let hasBeenFill = [
+            document.getElementById("instagram").value.length > 0,
+            document.getElementById("facebook").value.length > 0,
+            document.getElementById("twitter").value.length > 0
+        ];
+
+        for (let i = 0; i < hasBeenFill.length; i++) {
+            if (hasBeenFill[i]) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+</script>

@@ -1,0 +1,54 @@
+header {
+    background-color: white;
+    user-select: none;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px inset black;
+}
+
+.brand img {
+    width: 150px;
+    padding: 5px 0;
+}
+
+ul {
+    list-style: none;
+    width: 100%;
+    display: flex;
+}
+
+.nav-link {
+    color: black;
+    padding: 10px 20px;
+    margin-right: 10px;
+    display: grid;
+    text-decoration: none;
+    transition: 0.4s;
+    place-items: center;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+    color: var(--bluecolor);
+}
+
+@media (max-width: 768px) {
+    nav {
+        display: grid;
+        justify-content: left;
+    }
+
+    ul {
+        display: grid;
+        justify-content: left;
+    }
+
+    .nav-link {
+        justify-content: left;
+        padding-left: 0;
+    }
+}

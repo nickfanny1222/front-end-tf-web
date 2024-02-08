@@ -1,0 +1,22 @@
+.table {
+    width: 100%;
+    margin: 20px auto;
+}
+
+.table td:nth-child(1) {
+    font-weight: bold;
+}
+
+.table-bordered {
+    border-collapse: collapse;
+}
+
+.table-bordered, .table-bordered th, .table-bordered td {
+    border: 1px solid gray;
+}
+
+.table th, .table td {
+    vertical-align: center;
+    text-align: justify;
+    padding: 10px;
+}

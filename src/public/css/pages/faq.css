@@ -1,0 +1,42 @@
+.faq {
+    margin-bottom: 40px;
+}
+
+.faq h1 {
+    text-align: center;
+    margin: 40px auto;
+}
+
+.questions-grid {
+    display: flex;
+}
+
+.question-column {
+    flex: 50%;
+}
+
+.question {
+    margin: 0 40px 40px 40px;
+}
+
+.question h2 {
+    font-size: 13pt;
+    margin-bottom: 10px;
+    text-align: justify;
+}
+
+.question p {
+    text-align: justify;
+}
+
+@media (max-width: 768px) {
+    .questions-grid {
+        display: grid;
+    }
+
+    .question {
+        padding: 20px 0;
+        margin: 0;
+        border-bottom: 1px solid gray;
+    }
+}

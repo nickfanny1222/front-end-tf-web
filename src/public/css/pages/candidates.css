@@ -1,0 +1,66 @@
+.filter button {
+    margin: 40px 20px 20px 20px;
+}
+
+.card-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.card {
+    display: grid;
+    place-items: center;
+    width: 300px;
+    height: 400px;
+    border: 1px solid gray;
+    padding: 10px;
+    margin: 20px auto;
+    border-radius: 5px;
+    transition: 0.4s;
+    text-decoration: none;
+    color: black;
+    user-select: none;
+}
+
+.card:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.card hr {
+    border-color: lightgray;
+}
+
+.contacts img {
+    width: 30px;
+}
+
+.profile {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+}
+
+.descricao::after, .descricao::before {
+    content: "\"";
+}
+
+@media (max-width: 420px) {
+    .filter button {
+        margin-left: 0;
+    }
+
+    .modal {
+        width: calc(90% - 60px);
+        min-width: auto !important;
+    }
+
+    .modal-title button {
+        padding: 6px 10px !important;
+    }
+
+    .modal-footer button {
+        margin: 0 !important;
+    }
+}

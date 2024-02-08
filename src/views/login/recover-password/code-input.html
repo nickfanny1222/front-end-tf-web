@@ -1,0 +1,32 @@
+<section class="login">
+    <form action="" method="post" class="login-grid">
+        <h1>Recuperar senha</h1>
+
+        <p>
+            Um código de recuperação foi enviado ao seu e-mail.
+        </p>
+
+        <p class="text-danger">
+            <br>@{alert}@
+        </p>
+
+        <div class="input">
+            <label for="code">Informe o código</label>
+            <input type="number" name="code" id="code" required>
+        </div>
+        
+        <input type="hidden" name="email" value="@{email}@">
+        <input type="hidden" name="action" value="validatecode">
+
+        <div class="action code">
+            <button class="btn btn-outline-green" type="button" onclick="document.getElementById('sendcode').submit();">Reenviar código</button>
+            <button class="btn btn-outline-blue" type="submit">Confirmar</button>
+        </div>
+
+    </form>
+
+    <form id="sendcode" action="" method="post">
+        <input type="hidden" name="email" value="@{email}@">
+        <input type="hidden" name="action" value="sendcode">
+    </form>
+</section>

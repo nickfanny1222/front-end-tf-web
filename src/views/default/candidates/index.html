@@ -1,0 +1,210 @@
+<section class="container filter">
+    <button class="btn btn-outline-blue" onclick="openModal()">Filtrar busca</button>
+
+    <div class="modal-background" style="display: none" onclick="openModal()"></div>
+
+    <div class="modal" style="display: none">
+        <div class="modal-content">
+            <div class="modal-title">
+                <h1>Filtrar por</h1>
+                <button class="btn btn-outline-red" onclick="openModal()">&times;</button>
+            </div>
+            <hr>
+            <div class="modal-body">
+                <h2>Curso</h2>
+                <div class="container">
+                    <div>
+                        <input type="radio" onchange="configFilters()" name="course" id="agroindustria" value="Agroindústria">
+                        <label for="agroindustria">Agroindústria</label>
+                    </div>
+                    <div>
+                        <input type="radio" onchange="configFilters()" name="course" id="agropecuaria" value="Agropecuária">
+                        <label for="agropecuaria">Agropecuária</label>
+                    </div>
+                    <div>
+                        <input type="radio" onchange="configFilters()" name="course" id="informatica" value="Informática">
+                        <label for="informatica">Informática</label>
+                    </div>
+                </div>
+
+                <br>
+
+                <h2>Estado</h2>
+                <div class="container">
+                    <div>
+                        <input type="radio" onchange="configFilters()" name="status" id="matriculado" value="Matriculado">
+                        <label for="matriculado">Matriculado</label>
+                    </div>
+                    <div>
+                        <input type="radio" onchange="configFilters()" name="status" id="cursando" value="Cursando">
+                        <label for="cursando">Cursando</label>
+                    </div>
+                    <div>
+                        <input type="radio" onchange="configFilters()" name="status" id="trancado" value=Trancado>
+                        <label for="trancado">Trancado</label>
+                    </div>
+                    <div>
+                        <input type="radio" onchange="configFilters()" name="status" id="concluido" value="Concluído">
+                        <label for="concluido">Concluído</label>
+                    </div>
+                    <div>
+                        <input type="radio" onchange="configFilters()" name="status" id="desistente" value="Desistente">
+                        <label for="desistente">Desistente</label>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            
+            <div class="modal-footer">
+                <button class="btn btn-outline-green" onclick="resetFilters(); openModal()">Limpar filtros</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container" id="content">
+</section>
+
+@{no-itens}@
+
+<script>
+    const candidates = [@{candidates}@];
+    const filter = {
+        curso: null,
+        estado: null
+    }
+    
+    window.addEventListener("DOMContentLoaded", createCards);
+
+    function createCards() {
+        let grid = document.createElement("div");
+        grid.setAttribute("class", "card-grid");
+        grid.setAttribute("id", "grid");
+
+        let itens = [];
+
+        try {
+            document.getElementById("content").removeChild(document.getElementById("grid"));
+        } catch { }
+
+        candidates.forEach(item => {
+            let push = true;
+
+            if (filter.curso != null) {
+                if (item.curso != filter.curso) push = false;
+            }
+
+            if (filter.estado != null) {
+                if (item.estado != filter.estado) push = false;
+            }
+
+            if (push) itens.push(item);
+        });
+
+        if (itens.length == 0) {
+            document.getElementById("no-itens").style.display = "grid";
+            return;
+        }
+
+        else {
+            document.getElementById("no-itens").style.display = "none";
+        }
+
+        itens.forEach(item => {
+            let a = document.createElement("a");
+            a.setAttribute("class", "card");
+            a.setAttribute("href", "@{URL}@/candidatos/" + item.id);
+
+            let img1 = document.createElement("img");
+            img1.setAttribute("src", (item.profile_image == "null" ? "/static/images/default user.png" : item.profile_image));
+            img1.setAttribute("class", "profile");
+            
+            let h2 = document.createElement("h2");
+            h2.innerHTML = item.nome;
+
+            let hr = document.createElement("hr");
+
+            let div = document.createElement("div");
+            div.setAttribute("class", "contacts");
+
+            item.contatos.forEach(element => {
+                let img2 = document.createElement("img");
+                img2.setAttribute("src", "/static/images/" + element + ".png");
+                img2.setAttribute("alt", element);
+                div.appendChild(img2);
+            });
+
+            if (item.contatos.length == 0) {
+                let h4 = document.createElement("h4");
+                h4.innerHTML = "Esse candidato não possui contatos";
+                h4.setAttribute("style", "text-align: center");
+                div.appendChild(h4);
+            }
+
+            let hr2 = document.createElement("hr");
+
+            let span = document.createElement("span");
+
+            let i = document.createElement("i");
+            i.setAttribute("class", "descricao");
+            i.innerHTML = item.curso + " - " + item.estado;
+            span.appendChild(i);
+
+            a.appendChild(img1);
+            a.appendChild(h2);
+            a.appendChild(hr);
+            a.appendChild(div);
+            a.appendChild(hr2);
+            a.appendChild(span);
+
+            grid.appendChild(a);
+        });
+
+        document.getElementById("content").appendChild(grid);
+    }
+
+    function openModal() {
+        let modal = document.querySelector('div.modal');
+
+        modal.style.display = modal.style.display == "none" ? "block" : "none";
+        
+        let background = document.querySelector('div.modal-background');
+
+        background.style.display = background.style.display == "none" ? "block" : "none";
+    }
+
+    function configFilters() {
+        let curso = document.getElementsByName("course");
+
+        curso.forEach(item => {
+            if (item.checked) filter.curso = item.value;
+        });
+
+        let estado = document.getElementsByName("status");
+
+        estado.forEach(item => {
+            if (item.checked) filter.estado = item.value;
+        });
+
+        createCards();
+    }
+
+    function resetFilters() {
+        let curso = document.getElementsByName("course");
+        let estado = document.getElementsByName("status");
+
+        curso.forEach(item => {
+            item.checked = false;
+        });
+
+        estado.forEach(item => {
+            item.checked = false;
+        });
+
+        filter.curso = null;
+        filter.estado = null;
+
+        createCards();
+    }
+</script>

@@ -1,0 +1,12 @@
+.no-content {
+    height: 500px;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+button {
+    margin: 40px auto;
+}

@@ -1,0 +1,91 @@
+.login {
+    display: grid;
+    place-items: center;
+    margin: 40px auto;
+}
+
+.login-grid {
+    width: 400px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    display: block;
+    box-shadow: 5px 5px 25px black;
+    border: 1px solid gray;
+    padding: 40px;
+}
+
+.login-grid h1 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.login-grid p {
+    text-align: center;
+}
+
+.input {
+    display: grid;
+    place-items: left;
+    margin: 20px auto;
+}
+
+.input a {
+    justify-self: end;
+    color: gray;
+    text-decoration: none;
+    transition: 0.2s;
+    font-weight: bold;
+}
+
+.input a:hover {
+    color: var(--bluecolor);
+}
+
+input {
+    width: calc(100% - 22px);
+    border: none;
+    height: 30px;
+    border-radius: 10px;
+    color: black;
+    font-size: 12pt;
+    padding: 5px 10px;
+    outline: none;
+    border: 1px solid gray !important;
+    transition: 0.2s;
+}
+
+input:focus, input:valid {
+    border-color: black;
+}
+
+.action {
+    display: flex;
+    justify-content: right;
+}
+
+.code {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (max-width: 420px) {
+    .login-grid {
+        width: 80%;
+        padding: 8% 5%;
+        box-shadow: none;
+    }
+
+    .action {
+        display: grid;
+        width: 100%;
+    }
+
+    .code {
+        justify-content: center;
+    }
+
+    .code button {
+        margin: 5px 0;
+        width: 100%;
+    }
+}

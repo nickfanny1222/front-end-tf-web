@@ -1,0 +1,217 @@
+<section class="container">
+    <h1>Minhas habilidades</h1>
+    <div id="table">
+
+    </div>
+</section>
+
+<section class="action">
+    <button type="button" class="btn btn-outline-green" onclick="openNewModal()">Nova habilidade</button>
+</section>
+
+<section id="modal">
+    <div id="edit-modal-background" class="modal-background" style="display: none" onclick="closeEditModal()"></div>
+    <form method="post" action="" id="edit-modal" class="modal" style="display: none">
+        <div class="modal-title">
+            <h1>Editar habilidade</h1>
+            <button type="button" class="btn btn-outline-red" onclick="closeEditModal()">&times;</button>
+        </div>
+
+        <hr>
+
+        <div class="modal-body">
+            <div class="input">
+                <label for="edit-titulo">Título</label>
+                <input type="text" name="titulo" id="edit-titulo" required>
+            </div>
+
+            <br>
+
+            <div class="input">
+                <label for="edit-descricao">Descrição</label>
+                <textarea name="descricao" id="edit-descricao" cols="30" rows="10" required></textarea>
+            </div>
+            
+            <input type="hidden" name="id" id="edit-id" value="null">
+            <input type="hidden" name="acao" value="editar">
+        </div>
+
+        <hr>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-red" onclick="closeEditModal()">Fechar</button>
+            <button type="submit" class="btn btn-outline-green">Salvar</button>
+        </div>
+    </form>
+
+    <div id="delete-modal-background" class="modal-background" style="display: none" onclick="closeDeleteModal()"></div>
+    <form action="" method="post" class="modal" id="delete-modal" style="display: none">
+        <div class="modal-title">
+            <h1>Excluir habilidade</h1>
+            <button type="button" class="btn btn-outline-red" onclick="closeDeleteModal()">&times;</button>
+        </div>
+
+        <hr>
+
+        <div class="modal-body">
+            <span>Deseja realmente excluir a habilidade?</span>
+            <input type="hidden" name="id" id="delete-id" value="null">
+            <input type="hidden" name="acao" value="excluir">
+        </div>
+
+        <hr>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-red" onclick="closeDeleteModal()">Fechar</button>
+            <button type="submit" class="btn btn-outline-green">Excluir</button>
+        </div>
+    </form>
+    
+    <div id="new-modal-background" class="modal-background" style="display: none" onclick="closeNewModal()"></div>
+    <form method="post" action="" id="new-modal" class="modal" style="display: none">
+        <div class="modal-title">
+            <h1>Cadastrar habilidade</h1>
+            <button type="button" class="btn btn-outline-red" onclick="closeNewModal()">&times;</button>
+        </div>
+
+        <hr>
+
+        <div class="modal-body">
+            <div class="input">
+                <label for="new-titulo">Título</label>
+                <input type="text" name="titulo" id="new-titulo" required>
+            </div>
+
+            <br>
+
+            <div class="input">
+                <label for="new-descricao">Descrição</label>
+                <textarea name="descricao" id="new-descricao" cols="30" rows="10" required></textarea>
+            </div>
+            
+            <input type="hidden" name="acao" value="cadastrar">
+        </div>
+
+        <hr>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-red" onclick="closeNewModal()">Fechar</button>
+            <button type="submit" class="btn btn-outline-green">Cadastrar</button>
+        </div>
+    </form>
+</section>
+
+<script>
+    const habilitys = [@{hability}@];
+
+    window.addEventListener("DOMContentLoaded", createTable(habilitys));
+
+    function createTable(items) {
+        let table = document.createElement("table");
+        table.setAttribute("class", "table table-bordered table-stripped");
+
+        let th = [
+            document.createElement("th"),
+            document.createElement("th"),
+            document.createElement("th")
+        ]
+
+        th[0].innerHTML = "Título";
+        th[1].innerHTML = "Descrição";
+        th[2].innerHTML = "Ações";
+
+        let thead = document.createElement("thead");
+        
+        th.forEach(item => {
+            thead.appendChild(item);
+        });
+
+        let tbody = document.createElement("tbody");
+
+        items.forEach(item => {
+            let tr = document.createElement("tr");
+
+            let td1 = document.createElement("td");
+            td1.innerHTML = item.titulo;
+
+            let td2 = document.createElement("td");
+            td2.innerHTML = item.descricao;
+
+            let td3 = document.createElement("td");
+            td3.setAttribute("style", "text-align: center");
+
+            let button1 = document.createElement("button");
+            button1.innerHTML = "Editar";
+            button1.setAttribute("class", "btn btn-outline-blue");
+            button1.setAttribute("onclick", "openEditModal('" + JSON.stringify(item) + "')");
+
+            let button2 = document.createElement("button");
+            button2.innerHTML = "Excluir";
+            button2.setAttribute("class", "btn btn-outline-red");
+            button2.setAttribute("onclick", "openDeleteModal(" + item.id + ")");
+
+            td3.appendChild(button1);
+            td3.appendChild(button2);
+
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+            tr.appendChild(td3);
+
+            tbody.appendChild(tr);
+        });
+
+        table.appendChild(thead);
+        table.appendChild(tbody);
+
+        document.getElementById("table").appendChild(table);
+    }
+
+    function submitEditForm(obj) {
+        obj = JSON.parse(obj);
+        document.getElementById("edit-id").value = obj.id;
+        document.getElementById("edit-descricao").value = obj.descricao;
+        document.getElementById("edit-titulo").value = obj.titulo;
+        document.getElementById("edit-form").submit();
+    }
+    
+    function submitDeleteForm(id) {
+        document.getElementById("delete-id").value = id;
+        document.getElementById("delete-form").submit();
+    }
+
+    function openDeleteModal(id) {
+        document.getElementById("delete-id").value = id;
+        document.getElementById("delete-modal").style.display = "block";
+        document.getElementById("delete-modal-background").style.display = "block";
+    }
+
+    function openEditModal(obj) {
+        obj = JSON.parse(obj);
+        document.getElementById("edit-id").value = obj.id;
+        document.getElementById("edit-titulo").value = obj.titulo;
+        document.getElementById("edit-descricao").value = obj.descricao;
+        document.getElementById("edit-modal").style.display = "block";
+        document.getElementById("edit-modal-background").style.display = "block";
+    }
+
+    function openNewModal() {
+        document.getElementById("new-modal").style.display = "block";
+        document.getElementById("new-modal-background").style.display = "block";
+    }
+
+    function closeDeleteModal() {
+        document.getElementById("delete-modal").style.display = "none";
+        document.getElementById("delete-modal-background").style.display = "none";
+    }
+
+    function closeEditModal() {
+        document.getElementById("edit-modal").style.display = "none";
+        document.getElementById("edit-modal-background").style.display = "none";
+    }
+
+    function closeNewModal() {
+        document.getElementById("new-modal").style.display = "none";
+        document.getElementById("new-modal-background").style.display = "none";
+    }
+
+</script>

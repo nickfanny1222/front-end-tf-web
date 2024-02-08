@@ -1,0 +1,57 @@
+.container h1 {
+    margin: 40px auto;
+    text-align: center;
+}
+
+input, textarea {
+    border: 1px solid gray !important;
+    width: calc(100% - 20px);
+}
+
+textarea {
+    width: calc(100% - 10px) !important;
+    min-width: auto !important;
+}
+
+.action {
+    width: 80%;
+    display: grid;
+    place-items: end;
+    margin: 20px auto;
+}
+
+@media (max-width: 580px) {
+    .container h1 {
+        text-align: left;
+    }
+
+    #table {
+        overflow-x: scroll;
+    }
+
+    .modal {
+        width: calc(90% - 60px);
+        min-width: auto !important;
+    }
+
+    .modal-title button {
+        padding: 6px 10px !important;
+        border: none;
+        font-weight: bold;
+    }
+
+    .modal-footer {
+        display: flex;
+        justify-content: space-between !important;
+    }
+
+    .modal-footer button {
+        margin: 0 !important;
+    }
+}
+
+@media (max-width: 420px) {
+    .action {
+        place-items: center;
+    }
+}
